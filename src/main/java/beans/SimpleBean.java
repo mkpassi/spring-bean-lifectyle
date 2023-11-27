@@ -1,13 +1,15 @@
 package beans;
 
+import org.springframework.beans.factory.DisposableBean;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
-@Component
-public class SimpleBean {
+
+public class SimpleBean implements InitializingBean, DisposableBean{
 
 	private SimpleBean2 simpleBean2;
 	private SimpleBean3 simpleBean3;
@@ -48,5 +50,18 @@ public class SimpleBean {
 
 	public SimpleBean3 getSimpleBean3() {
 		return simpleBean3;
+	}
+
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		System.out.println(getClass().getSimpleName() + "::afterPropertiesSet");
+	}
+
+	private void initMethod() {
+		System.out.println(getClass().getSimpleName() + "::initMethod");
+	}
+
+	private void destroyMethod() {
+		System.out.println(getClass().getSimpleName() + "::destroyMethod");
 	}
 }

@@ -9,6 +9,7 @@ public class RunnerAnnotationConfig {
 	public static void main(String[] args) {
 		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(ConfigurationBySpring.class);
 		context.getBean("simpleBean",SimpleBean.class).sayHello();
+		context.close();
 	}
 
 }
